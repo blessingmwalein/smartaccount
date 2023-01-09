@@ -141,8 +141,7 @@
                 <!-- Leftbar User -->
                 <div class="leftbar-user">
                     <Link href="pages-profile.html">
-                    <img src="/images/user.jpg" alt="user-image" height="42"
-                        class="rounded-circle shadow-sm">
+                    <img src="/images/user.jpg" alt="user-image" height="42" class="rounded-circle shadow-sm">
                     <span class="leftbar-user-name mt-2">Smart Accounting</span>
                     </Link>
                 </div>
@@ -153,7 +152,7 @@
                     <li class="side-nav-title">Navigation</li>
 
                     <li class="side-nav-item">
-                        <Link href="/admin/" aria-expanded="false" aria-controls="sidebarDashboards"
+                        <Link href="/admin/dashboard" aria-expanded="false" aria-controls="sidebarDashboards"
                             class="side-nav-link">
                         <i class="uil-home-alt"></i>
                         <span> Dashboard </span>
