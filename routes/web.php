@@ -22,8 +22,8 @@ use Inertia\Inertia;
 |
 */
 
-Route::post('/', [UserController::class, 'login']);
-Route::post('/login', [UserController::class, 'login']);
+Route::get('/', [UserController::class, 'login']);
+Route::get('/login', [UserController::class, 'login']);
 
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
