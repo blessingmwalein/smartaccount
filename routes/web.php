@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Controller;
 use App\Http\Controllers\CustomerController;
 use App\Http\Controllers\StockCategoryController;
 use App\Http\Controllers\StockController;
@@ -22,8 +23,7 @@ use Inertia\Inertia;
 |
 */
 
-Route::get('/', [UserController::class, 'login']);
-Route::get('/login', [UserController::class, 'login']);
+Route::get('/', [Controller::class, 'index']);
 
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
