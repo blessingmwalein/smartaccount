@@ -22,6 +22,7 @@ use Inertia\Inertia;
 |
 */
 
+Route::post('/login', [UserController::class, 'login']);
 
 
 Route::middleware(['auth:sanctum', 'admin'])->group(function () {
