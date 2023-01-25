@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
+use App\Models\Store;
 
 class UserController extends Controller
 {
@@ -16,7 +17,8 @@ class UserController extends Controller
     public function index()
     {
         return Inertia::render('User', [
-            'users' => User::all()
+            'users' => User::all(),
+            'stores' =>Store::all()
         ]);
     }
     public function login()
@@ -84,8 +86,14 @@ class UserController extends Controller
         $data = $request->all();
         //encrypt password
         $data['password'] = bcrypt($data['password']);
-        $user->update($data);
 
+        $user->name= $data['name'];
+        $user->email = $data['email'];
+        $user->role = $data['role'];
+        $user->store_id =  $data['store_id'];
+        $user->password = $data['password'];
+        $user->save();
+        
         return redirect()->route('users.index');
     }
 

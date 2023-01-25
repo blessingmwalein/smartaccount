@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Stock;
 use App\Models\Store;
 use App\Models\StoreStockAllocation;
+use App\Models\StoreStockSold;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 
@@ -138,8 +139,12 @@ class StoreController extends Controller
         return redirect()->route('stores.index');
     }
 
-    public function storeStock(Store $store)
+    public function storeStock(Request $request)
     {
-        return StoreStockAllocation::where('store_id', $store->id)->get();
+        return StoreStockAllocation::where('store_id', $request->id)->get();
+    }
+    public function storeStockSold(Request $request)
+    {
+        return StoreStockSold::where('store_id', $request->id)->get();
     }
 }

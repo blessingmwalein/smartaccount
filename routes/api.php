@@ -29,6 +29,8 @@ Route::middleware(['auth:sanctum', 'admin'])->group(function () {
         Route::get('/suppliers', [SupplierController::class, 'index'])->name('suppliers.index');
         Route::get('/stock/category', [StockCategoryController::class, 'index'])->name('categories.index');
 
-        Route::get('/{store}/{stock}', [StoreController::class, 'storeStock'])->name('store.stock');
     });
+
 });
+Route::get('/store/stock', [StoreController::class, 'storeStock'])->name('store.stock');
+Route::get('/store/sold', [StoreController::class, 'storeStockSold'])->name('store.sold');

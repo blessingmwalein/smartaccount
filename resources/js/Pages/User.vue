@@ -42,6 +42,14 @@
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
+                                                                <label for="name" class="form-label">Store</label>
+                                                                <select class="form-select mb-3" v-model="form.store_id">
+                                                                    <option selected>Open select store</option>
+                                                                    <option v-for="store in stores" :value="store.id" >
+                                                                        {{store.name}}</option>
+                                                                </select>
+                                                            </div>
+                                                            <div class="mb-3">
                                                                 <label for="name" class="form-label">Email</label>
                                                                 <input class="form-control" v-model="form.email"
                                                                     type="email" id="emailaddress1" required="">
@@ -144,7 +152,7 @@ import { useForm, Link } from "@inertiajs/inertia-vue3";
 
 export default {
     name: 'User',
-    props: ['users'],
+    props: ['users', 'stores'],
     components: {
         MainLayout,
         PageHolder
@@ -169,7 +177,8 @@ export default {
                 email: "",
                 role: "",
                 password: "",
-                id: null
+                id: null,
+                store_id:null
             })
         }
     },
@@ -203,6 +212,7 @@ export default {
             this.form.role = user.role;
             this.form.email = user.email;
             this.form.id = user.id;
+            this.form.store_id = user.store_id
             // this.form.image = store.image;
         }
     }

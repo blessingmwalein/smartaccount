@@ -23,6 +23,9 @@ class User extends Authenticatable
      *
      * @var string[]
      */
+
+    protected $with =['store'];
+
     protected $fillable = [
         'name',
         'email',
@@ -62,5 +65,10 @@ class User extends Authenticatable
     public function hasRole($role)
     {
         return $this->role == $role;
+    }
+
+    public function store()
+    {
+       return $this->belongsTo(Store::class);
     }
 }
