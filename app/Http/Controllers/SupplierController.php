@@ -41,7 +41,7 @@ class SupplierController extends Controller
     {
         $data = $request->all();
         Supplier::create($data);
-        return redirect()->route('suppliers.index');
+        return redirect()->back()->with('success', 'Supplier created successfully');
     }
 
     /**
@@ -77,7 +77,7 @@ class SupplierController extends Controller
     {
         $data = $request->all();
         $supplier->update($data);
-        return redirect()->route('suppliers.index');
+        return redirect()->back()->with('success', 'Supplier updated successfully');
     }
 
     /**
@@ -89,6 +89,6 @@ class SupplierController extends Controller
     public function destroy(Supplier $supplier)
     {
         $supplier->delete();
-        return redirect()->route('suppliers.index');
+        return redirect()->back()->with('success', 'Supplier deleted successfully');
     }
 }

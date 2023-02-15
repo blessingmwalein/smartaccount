@@ -40,7 +40,7 @@ class CustomerController extends Controller
     {
         $data = $request->all();
         Customer::create($data);
-        return redirect()->route('customers.index');
+        return redirect()->back()->with('success', 'Customer created successfully');
     }
 
     /**
@@ -76,7 +76,7 @@ class CustomerController extends Controller
     {
         $data= $request->all();
         $customer->update($data);
-        return redirect()->route('customers.index');
+        return redirect()->back()->with('success', 'Customer updated successfully');
     }
 
     /**
@@ -88,6 +88,6 @@ class CustomerController extends Controller
     public function destroy(Customer $customer)
     {
         $customer->delete();
-        return redirect()->route('customers.index');
+        return redirect()->back()->with('success', 'Customer deleted successfully');
     }
 }

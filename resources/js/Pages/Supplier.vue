@@ -98,8 +98,9 @@
                                                 <td class="table-user">
                                                     <img src="/images/user.jpg" alt="table-user"
                                                         class="me-2 rounded-circle">
-                                                    <a href="javascript:void(0);"
-                                                        class="text-body fw-semibold">{{ supplier.name }}</a>
+                                                    <a href="javascript:void(0);" class="text-body fw-semibold">{{
+                                                        supplier.name
+                                                    }}</a>
                                                 </td>
                                                 <td>
                                                     {{ supplier.address }}
@@ -119,8 +120,8 @@
                                                     <a @click.prevent="edit(supplier)" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#add-supplier" class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                                            class="mdi mdi-delete"></i></a>
+                                                    <a href="#" class="action-icon" @click="deleteSupplier(supplier)">
+                                                        <i class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
 
@@ -180,7 +181,7 @@ export default {
                     preserveScroll: true,
                     onSuccess: () => {
                         this.isEdit = false;
-                        this.form.reset('name', 'address','email','phone', 'id')
+                        this.form.reset('name', 'address', 'email', 'phone', 'id')
                         document.getElementById('cancel').click()
                     }
                 })
@@ -189,12 +190,22 @@ export default {
                     preserveScroll: true,
                     onSuccess: () => {
                         this.isEdit = false;
-                        this.form.reset('name', 'address','email','phone', 'id')
+                        this.form.reset('name', 'address', 'email', 'phone', 'id')
                         document.getElementById('cancel').click()
                     }
                 })
             }
 
+        },
+        deleteSupplier(supplier) {
+            if (confirm('Are you sure you want to delete this supplier?')) {
+                this.$inertia.delete(`/admin/suppliers/${supplier.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
         },
 
         edit(supplier) {

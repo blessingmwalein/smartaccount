@@ -48,7 +48,7 @@ class UserController extends Controller
         $data['password'] = bcrypt($data['password']);
         $user = User::create($data);
 
-        return redirect()->route('users.index');
+        return redirect()->back()->with('success', 'User created successfully');
     }
 
     /**
@@ -94,7 +94,7 @@ class UserController extends Controller
         $user->password = $data['password'];
         $user->save();
         
-        return redirect()->route('users.index');
+        return redirect()->back()->with('success', 'User updated successfully');
     }
 
     /**
@@ -103,8 +103,10 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
+        $user->delete();
+        return redirect()->back()->with('success', 'User deleted successfully');
     }
 
     public function loginUser(Request $request)

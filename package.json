@@ -21,6 +21,7 @@
         "vue": "^3.2.31"
     },
     "dependencies": {
-        "vue-bar-graph": "^2.0.0"
+        "vue-bar-graph": "^2.0.0",
+        "vue3-snackbar": "^1.1.2"
     }
 }

@@ -96,7 +96,7 @@
                                                     <a @click.prevent="edit(category)" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#add-category" class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                                    <a href="#" class="action-icon" @click.prevent="deleteCategory(category)"> <i
                                                             class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
@@ -174,6 +174,17 @@ export default {
             }
 
         },
+        deleteCategory(category) {
+            if (confirm('Are you sure you want to delete this category?')) {
+                this.$inertia.delete(`/admin/stock/category/${category.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
+        },
+
 
         edit(category) {
             this.isEdit = true;

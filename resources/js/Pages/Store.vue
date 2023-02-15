@@ -42,7 +42,7 @@
                                             <div class="mb-3">
                                                 <label for="address" class="form-label">Image</label>
                                                 <input class="form-control" @input="form.image = $event.target.files[0]"
-                                                    type="file" required="" id="password1">
+                                                    type="file" id="password1">
                                             </div>
 
                                             <div class="modal-footer">
@@ -57,7 +57,7 @@
                                 </div><!-- /.modal-content -->
                             </div><!-- /.modal-dialog -->
                         </div>
-                       
+
                     </div>
                     <div class="col-sm-8">
                         <div class="text-sm-end">
@@ -94,7 +94,7 @@
                                             data-bs-target="#add-store" class="dropdown-item"><i
                                                 class="mdi mdi-pencil me-1"></i>Edit</a>
                                         <!-- item-->
-                                        <a href="javascript:void(0);" class="dropdown-item"><i
+                                        <a href="#" class="dropdown-item" @click.prevent="deleteStore(store)"><i
                                                 class="mdi mdi-delete me-1"></i>Delete</a>
                                     </div>
                                 </div>
@@ -143,7 +143,7 @@ export default {
     props: ['stores', 'stocks'],
     components: {
         MainLayout,
-        PageHolder,Link
+        PageHolder, Link
     },
     data() {
         return {
@@ -165,7 +165,7 @@ export default {
                 image: null,
                 id: null
             }),
-           
+
         }
     },
     methods: {
@@ -190,6 +190,18 @@ export default {
                 })
             }
 
+        },
+
+        //submit delete store request
+        deleteStore(store) {
+            if (confirm('Are you sure you want to delete this store?')) {
+                this.$inertia.delete(`/admin/stores/${store.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
         },
 
         edit(store) {

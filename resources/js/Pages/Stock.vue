@@ -81,8 +81,8 @@
                                                                     <label for="inputEmail4" class="form-label">Unit
                                                                         price</label>
                                                                     <input class="form-control"
-                                                                        v-model="form.unit_price" type="number"
-                                                                        id="emailaddress1" required="" placeholder="">
+                                                                        v-model="form.unit_price" type="text"
+                                                                        id="emailaddress1" placeholder="">
                                                                 </div>
 
                                                             </div>
@@ -188,9 +188,9 @@
 
                                                 <td class="table-action">
                                                     <a @click.prevent="edit(stock)" href="#" data-bs-toggle="modal"
-                                                        data-bs-target="#add-store" class="action-icon"> <i
+                                                        data-bs-target="#add-products" class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                                    <a href="#" class="action-icon" @click.prevent="deleteStock(stock)"> <i
                                                             class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
@@ -384,7 +384,16 @@ export default {
             }
 
         },
-
+        deleteStock(stock) {
+            if (confirm('Are you sure you want to delete this stock?')) {
+                this.$inertia.delete(`/admin/stock/products/${stock.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
+        },
         edit(product) {
             this.isEdit = true;
             this.form.name = product.name;

@@ -43,10 +43,11 @@
                                                             </div>
                                                             <div class="mb-3">
                                                                 <label for="name" class="form-label">Store</label>
-                                                                <select class="form-select mb-3" v-model="form.store_id">
+                                                                <select class="form-select mb-3"
+                                                                    v-model="form.store_id">
                                                                     <option selected>Open select store</option>
-                                                                    <option v-for="store in stores" :value="store.id" >
-                                                                        {{store.name}}</option>
+                                                                    <option v-for="store in stores" :value="store.id">
+                                                                        {{ store.name }}</option>
                                                                 </select>
                                                             </div>
                                                             <div class="mb-3">
@@ -127,11 +128,10 @@
                                                     <a @click.prevent="edit(user)" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#add-user" class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
-                                                            class="mdi mdi-delete"></i></a>
+                                                    <a href="#" class="action-icon" @click.prevent="deleteUser(user)">
+                                                        <i class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
-
 
                                         </tbody>
                                     </table>
@@ -178,7 +178,7 @@ export default {
                 role: "",
                 password: "",
                 id: null,
-                store_id:null
+                store_id: null
             })
         }
     },
@@ -204,6 +204,16 @@ export default {
                 })
             }
 
+        },
+        deleteUser(user) {
+            if (confirm('Are you sure you want to delete this user?')) {
+                this.$inertia.delete(`/admin/users/${user.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
         },
 
         edit(user) {

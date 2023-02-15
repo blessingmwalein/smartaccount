@@ -118,7 +118,7 @@
                                                     <a @click.prevent="edit(customer)" href="#" data-bs-toggle="modal"
                                                         data-bs-target="#add-customer" class="action-icon"> <i
                                                             class="mdi mdi-square-edit-outline"></i></a>
-                                                    <a href="javascript:void(0);" class="action-icon"> <i
+                                                    <a href="#" class="action-icon" @click.prevent="deleteCustomer(customer)"> <i
                                                             class="mdi mdi-delete"></i></a>
                                                 </td>
                                             </tr>
@@ -195,6 +195,17 @@ export default {
             }
 
         },
+        deleteCustomer(customer) {
+            if (confirm('Are you sure you want to delete this customer?')) {
+                this.$inertia.delete(`/admin/customers/${customer.id}`, {
+                    preserveScroll: true,
+                    onSuccess: () => {
+                        this.isEdit = false;
+                    }
+                })
+            }
+        },
+
 
         edit(customer) {
             this.isEdit = true;

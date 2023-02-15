@@ -216,7 +216,8 @@
             <slot />
         </div>
     </div>
-    <!-- END wrapper -->
+    <vue3-snackbar bottom right :duration="4000"></vue3-snackbar>
+
 </template>
 <script>
 import { Link, Inertia } from '@inertiajs/inertia-vue3';
@@ -229,6 +230,29 @@ export default {
         logout() {
             this.$inertia.post(route("logout"));
         },
-    }
+        fireSnackbar(message, title, color, type = "infor") {
+            this.$snackbar.add({
+                type: type,
+                info: type,
+                background: color,
+                text: message,
+                title: title,
+            });
+        },
+    },
+    watch: {
+        //watch to flash messages
+        $page(newProps, oldProps) {
+            if (newProps.props.flash.success) {
+                this.fireSnackbar(newProps.props.flash.success, "Success", "#31CF80", "info");
+            }
+            if (newProps.props.flash.error) {
+                this.fireSnackbar(newProps.props.flash.error, "Error", "#D82C5B", "info");
+            }
+            if (newProps.props.flash.message) {
+                this.fireSnackbar(newProps.props.flash.message, "Message", "#2DADCF", "info");
+            }
+        },
+    },
 };
 </script>

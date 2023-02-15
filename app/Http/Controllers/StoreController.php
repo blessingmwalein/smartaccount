@@ -52,7 +52,7 @@ class StoreController extends Controller
             $data['image'] = $name;
         }
         $store = Store::create($data);
-        return redirect()->route('stores.index');
+        return redirect()->back()->with('success', 'Store created successfully');
     }
 
     /**
@@ -103,7 +103,7 @@ class StoreController extends Controller
             $data['image'] = $name;
         }
         $store->update($data);
-        return redirect()->route('stores.index');
+        return redirect()->back()->with('success', 'Store updated successfully');
     }
     public function allocate(Request $request)
     {
@@ -124,7 +124,7 @@ class StoreController extends Controller
         $stock->number_items_unit = $stock->number_items_unit - $data['number_items_unit'];
         $stock->save();
 
-        return redirect()->route('stores.show', $data['store_id']);
+        return redirect()->back()->with('success', 'Stock allocated successfully');
     }
 
     /**
@@ -136,7 +136,7 @@ class StoreController extends Controller
     public function destroy(Store $store)
     {
         $store->delete();
-        return redirect()->route('stores.index');
+        return redirect()->back()->with('success', 'Store deleted successfully');
     }
 
     public function storeStock(Request $request)
